@@ -1,0 +1,13 @@
+header > * {
+  margin: 1rem;
+}
+.burgerIcon {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.currentScore {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
