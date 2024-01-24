@@ -1,40 +1,36 @@
 /* eslint-disable react/prop-types */
 import Card from "./Card";
 import { fetchPokemon } from "../api";
+import { getItems } from "../helpers";
 import { useEffect, useState } from "react";
 
-export default function Board({ cardCount = 4, pokemonCount = 100 }) {
+export default function Board({ cardCount = 4, pokeCount = 100 }) {
   const [cards, setCards] = useState([]);
-  const memoPokemonArr = []; //memo = memorized
+  const [memoPokeArr, setMemoPokeArr] = useState([]); // memo = memorized
 
-  function handleClick(item) {
-    memoPokemonArr.push(item);
-    console.log(memoPokemonArr);
-  }
-
-  //do once per cardCount change
   useEffect(() => {
-    const randomIndex = () => Math.floor(Math.random() * pokemonCount - 1);
-    fetchPokemon(pokemonCount).then((data) => {
-      const newCards = [];
+    function handleClick(clickedElData) {
+      setMemoPokeArr((prevMemoPokeArr) => [...prevMemoPokeArr, clickedElData]); //re-render Board and memorize clicked element data
+    }
 
-      for (let i = 1; i <= cardCount; i++) {
-        const item = data.results[randomIndex()];
-        const url = item.url;
-        const name = item.name;
-        newCards.push(
+    fetchPokemon(pokeCount).then((data) => {
+      const cardsArrData = getItems(data, cardCount, pokeCount, memoPokeArr);
+      const newCards = cardsArrData.map((cardData, i) => {
+        const url = cardData.url;
+        const name = cardData.name;
+        return (
           <Card
             key={i}
             url={url}
             name={name}
-            onClick={() => handleClick(item)}
+            onClick={() => handleClick(cardData)}
           />
         );
-      }
+      });
 
       setCards(newCards);
     });
-  }, [cardCount, pokemonCount]);
+  }, [cardCount, memoPokeArr, pokeCount]);
 
   return <div className="card-container">{cards}</div>;
 }
