@@ -5,7 +5,7 @@ import CurrentScore from "./CurrentScore";
 import { useState } from "react";
 
 export default function Header() {
-  const [visible, setVisibility] = useState(true);
+  const [visible, setVisibility] = useState(false); //change to true when app done
 
   const handleClick = () => {
     setVisibility(!visible);
