@@ -12,11 +12,6 @@
     - `clear(memorizedPokemonArr)` (restart game).
     - displays Difficulty buttons: easy,medium,hard value.
 
-## Button Component
-
-- burgerIcon
-- `onClick` displays/hides Menu
-
 ## CurrentScore Component:
 
 - Display the `currentScore` (`memorizedPokemonArr.length`). Update it when on the value change. (each round)
@@ -33,6 +28,7 @@
 
   - Has img and value
   - onClick: `handleClick`
+  - if level is `hard` flip images
 
 ## handleClick()
 
@@ -43,9 +39,9 @@
 - display Menu, rerender message with `gameWinnerMessage`
 - store and update LocalStorage `winCount`
 
-## clearScore(arr)
+## reset
 
-- return arr=[]
+- resets array =[]
 
 ## round
 
@@ -56,6 +52,10 @@
 # TODO
 
 Base:
+
+- move wins to current score
+- add close button to menu
+- add loader
 
 General:
 

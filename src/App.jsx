@@ -2,24 +2,25 @@ import "./styles/App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-import Board from "./components/Board";
 
-export default function App({ score }) {
+export default function App() {
   return (
     <>
-      <Header score={score} />
-      <Main score={score} />
+      <Header />
+      <Main />
       <Footer />
     </>
   );
 }
 
-<App >
+{
+  /* <App>
   <Header>
-    <CurrentScore score={score} />
+    <CurrentScore />
   </Header>
   <Main>
-    <Board onScoreChange={}/>
+    <Board />
   </Main>
   <Footer />
-</App>;
+</App>; */
+}

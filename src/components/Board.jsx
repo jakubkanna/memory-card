@@ -31,6 +31,9 @@ export default function Board({
         winsRef.current = winsRef.current + 1;
         localStorage.setItem("wins", winsRef.current.toString());
       }
+
+      // Pass memoPokeArr.length to the parent
+      onScoreChange(memoPokeArr.length);
     }
 
     fetchPokemon(pokeCount).then((data) => {
