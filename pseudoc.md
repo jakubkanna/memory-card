@@ -47,9 +47,11 @@
 
 - return arr=[]
 
-## round(memorized, fetched, cardValue)
+## round
 
-- `memorized.find (element) => element.value === cardValue ? { memorized.length === fetched.length ? win() : clearScore(memorized)} : push to arr`
+- if lengths of arrays are equal is winner
+- else check if clicked item is present in memorized
+  - if no push item to memoreized else reset
 
 # TODO
 

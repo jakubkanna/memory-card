@@ -1,3 +1,3 @@
-export default function CurrentScore() {
-  return <div className="currentScore">CurrentScore</div>;
+export default function CurrentScore({ score }) {
+  return <div className="currentScore">CurrentScore: {score}</div>;
 }

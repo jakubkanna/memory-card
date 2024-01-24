@@ -1,20 +1,40 @@
 /* eslint-disable react/prop-types */
 import Card from "./Card";
-import { fetchPokemon } from "../api";
-import { getItems } from "../helpers";
+import { getCards, fetchPokemon } from "../helpers";
 import { useEffect, useState } from "react";
 
-export default function Board({ cardCount = 4, pokeCount = 100 }) {
+export default function Board({
+  cardCount = 4,
+  pokeCount = 100,
+  winsRef,
+  onScoreChange,
+}) {
   const [cards, setCards] = useState([]);
   const [memoPokeArr, setMemoPokeArr] = useState([]); // memo = memorized
 
   useEffect(() => {
     function handleClick(clickedElData) {
-      setMemoPokeArr((prevMemoPokeArr) => [...prevMemoPokeArr, clickedElData]); //re-render Board and memorize clicked element data
+      const isUnique = memoPokeArr.includes(clickedElData);
+
+      setMemoPokeArr((prevMemoPokeArr) => {
+        if (isUnique) {
+          // If clickedElData is already present, reset memoPokeArr
+          return [];
+        } else {
+          // If clickedElData is not present, add it to memoPokeArr
+          return [...prevMemoPokeArr, clickedElData];
+        }
+      });
+
+      //check for win
+      if (memoPokeArr.length === pokeCount - 1) {
+        winsRef.current = winsRef.current + 1;
+        localStorage.setItem("wins", winsRef.current.toString());
+      }
     }
 
     fetchPokemon(pokeCount).then((data) => {
-      const cardsArrData = getItems(data, cardCount, pokeCount, memoPokeArr);
+      const cardsArrData = getCards(data, cardCount, pokeCount, memoPokeArr);
       const newCards = cardsArrData.map((cardData, i) => {
         const url = cardData.url;
         const name = cardData.name;
@@ -30,7 +50,12 @@ export default function Board({ cardCount = 4, pokeCount = 100 }) {
 
       setCards(newCards);
     });
-  }, [cardCount, memoPokeArr, pokeCount]);
+  }, [cardCount, memoPokeArr, onScoreChange, pokeCount, winsRef]);
 
-  return <div className="card-container">{cards}</div>;
+  return (
+    <div className="card-container">
+      <div>Wins: {winsRef.current}</div>
+      {cards}
+    </div>
+  );
 }
