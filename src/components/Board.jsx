@@ -15,10 +15,12 @@ export default function Board({
 
   useEffect(() => {
     function handleClick(clickedElData) {
-      const isUnique = memoPokeArr.includes(clickedElData);
+      const isIncluded = memoPokeArr.some(
+        (item) => item.name === clickedElData.name
+      );
 
       setMemoPokeArr((prevMemoPokeArr) => {
-        return isUnique ? [] : [...prevMemoPokeArr, clickedElData];
+        return isIncluded ? [] : [...prevMemoPokeArr, clickedElData];
       });
 
       //check for win
