@@ -5,7 +5,7 @@
   transform: translate(-50%, -50%);
   z-index: 1;
   padding: 24px;
-
+  z-index: 999;
 }
 /* color */
 :root {
@@ -13,4 +13,15 @@
 }
 .menu {
   background-color: var(--lazur-water);
+}
+.backdrop {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 998; /* Ensure it's above other elements except menu*/
 }

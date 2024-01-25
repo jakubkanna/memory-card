@@ -10,15 +10,19 @@ export default function Header({
   difficultyData,
   difficultySetter,
 }) {
-  const [visible, setVisibility] = useState(true); //change to true when app done
+  const [menuVisible, setMenuVisibility] = useState(true);
 
-  const toggleVisibility = () => {
-    setVisibility(!visible);
+  const toggleMenu = () => {
+    setMenuVisibility(!menuVisible);
+  };
+
+  const closeMenu = () => {
+    setMenuVisibility(false);
   };
 
   return (
     <header>
-      <button type="button" className="burgerIcon" onClick={toggleVisibility}>
+      <button type="button" className="burgerIcon" onClick={toggleMenu}>
         <ThreeBarsIcon size={24} />
       </button>
       <CurrentScore
@@ -26,11 +30,11 @@ export default function Header({
         wins={winCount}
         difficultyData={difficultyData}
       />
-      {visible && (
-        <Menu
-          setDifficulty={difficultySetter}
-          setVisibility={toggleVisibility}
-        />
+
+      {menuVisible && <div className="backdrop" onClick={closeMenu}></div>}
+
+      {menuVisible && (
+        <Menu setDifficulty={difficultySetter} closeMenu={closeMenu} />
       )}
     </header>
   );

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "../styles/Menu.css";
 import MessageBox from "./MessageBox";
-import { MarkGithubIcon } from "@primer/octicons-react";
+import { MarkGithubIcon, XIcon } from "@primer/octicons-react";
 
-export default function Menu({ setDifficulty, setVisibility }) {
+export default function Menu({ setDifficulty, closeMenu }) {
   const [displayNewGameButton, setDisplayNewGameButton] = useState(true);
 
   function passValue(difficulty) {
     setDifficulty(difficulty);
-    setVisibility(); // Hide the Menu component after difficulty is selected
+    closeMenu(); // Hide the Menu component after difficulty is selected
   }
 
   function handleNewGame() {
@@ -16,8 +16,14 @@ export default function Menu({ setDifficulty, setVisibility }) {
   }
 
   return (
-    <>
-      <div className="menu">
+    <div className="menu">
+      <header>
+        {/* <button type="button">
+          <XIcon size={24} />
+        </button> */}
+      </header>
+
+      <div className="body">
         <MessageBox />
         <div className="buttonBox">
           {displayNewGameButton ? (
@@ -51,6 +57,6 @@ export default function Menu({ setDifficulty, setVisibility }) {
           </a>
         </footer>
       </div>
-    </>
+    </div>
   );
 }
