@@ -1,62 +1,16 @@
 # Pseudocode:
 
-## Menu Component({hidden}):
+## Board
 
-- ### Message({message=rules}) Component
+- generate cards each round
+-
 
-  - if `currentScore === 0` display rules (initially)
+clsoe menu on difficulity chanage
+reset message on menu close
 
-- ### Button Component
+gamedata{} must contain
 
-  - "New Game" button, which `onClick`:
-    - `clear(memorizedPokemonArr)` (restart game).
-    - displays Difficulty buttons: easy,medium,hard value.
-
-## CurrentScore Component:
-
-- Display the `currentScore` (`memorizedPokemonArr.length`). Update it when on the value change. (each round)
-
-## Board Component
-
-- `fetchedPokemonArr` = fetch number of Pokemon basing on clicked new game value: if `'easy'` do random from 0 - 1/4, `'medium'` 0 - 1/2, `'hard'` 0 - length
-
-- render cards
-
-- has `memorizedPokemonArr` on update render new cards (new round)
-
-- ### Card Component:
-
-  - Has img and value
-  - onClick: `handleClick`
-  - if level is `hard` flip images
-
-## handleClick()
-
-`    round(memorizedPokemonArr, fetchedPokemonArr, value)`
-
-## win()
-
-- display Menu, rerender message with `gameWinnerMessage`
-- store and update LocalStorage `winCount`
-
-## reset
-
-- resets array =[]
-
-## round
-
-- if lengths of arrays are equal is winner
-- else check if clicked item is present in memorized
-  - if no push item to memoreized else reset
-
-# TODO
-
-Base:
-
-- add loader
-- styling
-
-General:
-
-- fetching needs optimization in the future (should fetch pages)
-- passing states from App to Header and Main could be optimized
+wins count
+game difficulity
+memorizedCount
+pokeCount

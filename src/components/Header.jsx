@@ -4,17 +4,11 @@ import "../styles/Header.css";
 import CurrentScore from "./CurrentScore";
 import { useEffect, useState } from "react";
 
-export default function Header({
-  memoCount,
-  winCount,
-  difficultyData,
-  difficultySetter,
-  message,
-}) {
-  const [menuVisible, setMenuVisibility] = useState(true);
+export default function Header({ gameData, setDifficulty, message }) {
+  const [menuVisibility, setMenuVisibility] = useState(true);
 
   const toggleMenu = () => {
-    setMenuVisibility(!menuVisible);
+    setMenuVisibility(!menuVisibility);
   };
 
   const openMenu = () => {
@@ -25,26 +19,24 @@ export default function Header({
     setMenuVisibility(false);
   };
 
-  useEffect(() => openMenu(), [message]);
+  useEffect(() => {
+    typeof message === "string" && openMenu();
+  }, [message]);
 
   return (
     <header>
       <button type="button" className="burgerIcon" onClick={toggleMenu}>
         <ThreeBarsIcon size={24} />
       </button>
-      <CurrentScore
-        memorized={memoCount}
-        wins={winCount}
-        difficultyData={difficultyData}
-      />
+      <CurrentScore gameData={gameData} />
 
-      {menuVisible && <div className="backdrop" onClick={closeMenu}></div>}
+      {menuVisibility && <div className="backdrop" onClick={closeMenu}></div>}
 
-      {menuVisible && (
+      {menuVisibility && (
         <Menu
-          setDifficulty={difficultySetter}
-          closeMenu={closeMenu}
+          setDifficulty={setDifficulty}
           message={message}
+          closeMenu={closeMenu}
         />
       )}
     </header>

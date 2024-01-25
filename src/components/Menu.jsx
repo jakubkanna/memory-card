@@ -3,13 +3,8 @@ import "../styles/Menu.css";
 import MessageBox from "./MessageBox";
 import { MarkGithubIcon, XIcon } from "@primer/octicons-react";
 
-export default function Menu({ setDifficulty, closeMenu, message }) {
+export default function Menu({ setDifficulty, message, closeMenu }) {
   const [displayNewGameButton, setDisplayNewGameButton] = useState(true);
-
-  function passValue(difficulty) {
-    setDifficulty(difficulty);
-    closeMenu(); // Hide the Menu component after difficulty is selected
-  }
 
   function handleNewGame() {
     setDisplayNewGameButton(false);
@@ -28,13 +23,28 @@ export default function Menu({ setDifficulty, closeMenu, message }) {
             </button>
           ) : (
             <div className="difficultyButtons">
-              <button type="button" onClick={() => passValue("easy")}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDifficulty("easy");
+                  closeMenu();
+                }}>
                 Easy
               </button>
-              <button type="button" onClick={() => passValue("medium")}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDifficulty("medium");
+                  closeMenu();
+                }}>
                 Medium
               </button>
-              <button type="button" onClick={() => passValue("hard")}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDifficulty("hard");
+                  closeMenu();
+                }}>
                 Hard
               </button>
             </div>
