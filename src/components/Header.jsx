@@ -4,7 +4,7 @@ import "../styles/Header.css";
 import CurrentScore from "./CurrentScore";
 import { useState } from "react";
 
-export default function Header({ memorized }) {
+export default function Header({ memoCount, winCount }) {
   const [visible, setVisibility] = useState(false); //change to true when app done
 
   const handleClick = () => {
@@ -16,7 +16,7 @@ export default function Header({ memorized }) {
       <button type="button" className="burgerIcon" onClick={handleClick}>
         <ThreeBarsIcon size={24} />
       </button>
-      <CurrentScore score={memorized} />
+      <CurrentScore memorized={memoCount} wins={winCount} />
       {visible && <Menu />}
     </header>
   );

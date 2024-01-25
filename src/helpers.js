@@ -43,7 +43,7 @@ export async function fetchPokemon(count) {
     }
 
     const pokemonData = await response.json();
-    console.log(pokemonData);
+    // console.log(pokemonData);
     return pokemonData;
   } catch (error) {
     console.error("Error fetching Pokemon data:", error);

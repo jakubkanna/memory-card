@@ -1,8 +1,8 @@
-export default function CurrentScore({ score }) {
+export default function CurrentScore({ memorized, wins }) {
   return (
     <div className="currentScore">
-      <p>Wins:</p>
-      <p>Memorized: {score}</p>
+      <p>Wins: {wins}</p>
+      <p>Memorized: {memorized}</p>
     </div>
   );
 }
