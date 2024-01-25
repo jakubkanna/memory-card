@@ -6,11 +6,10 @@ import { useEffect, useState } from "react";
 export default function Board({
   cardCount = 4,
   pokeCount = 100,
-  winsRef,
-  onScoreChange,
+  memoPokeArr,
+  setMemoPokeArr,
 }) {
   const [cards, setCards] = useState([]);
-  const [memoPokeArr, setMemoPokeArr] = useState([]); // memo = memorized
 
   useEffect(() => {
     function handleClick(clickedElData) {
@@ -28,12 +27,12 @@ export default function Board({
 
       //check for win
       if (memoPokeArr.length === pokeCount - 1) {
-        winsRef.current = winsRef.current + 1;
-        localStorage.setItem("wins", winsRef.current.toString());
+        // winsRef.current = winsRef.current + 1;
+        // localStorage.setItem("wins", winsRef.current.toString());
       }
 
-      // Pass memoPokeArr.length to the parent
-      onScoreChange(memoPokeArr.length);
+      // // Pass memoPokeArr.length to the parent
+      // onScoreChange(memoPokeArr.length);
     }
 
     fetchPokemon(pokeCount).then((data) => {
@@ -53,12 +52,7 @@ export default function Board({
 
       setCards(newCards);
     });
-  }, [cardCount, memoPokeArr, onScoreChange, pokeCount, winsRef]);
+  }, [cardCount, memoPokeArr, pokeCount, setMemoPokeArr]);
 
-  return (
-    <div className="card-container">
-      <div>Wins: {winsRef.current}</div>
-      {cards}
-    </div>
-  );
+  return <div className="card-container">{cards}</div>;
 }

@@ -53,6 +53,7 @@
 
 Base:
 
+- display current score
 - move wins to current score
 - add close button to menu
 - add loader
