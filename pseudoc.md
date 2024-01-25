@@ -53,12 +53,11 @@
 
 Base:
 
-- display current score
-- move wins to current score
+- display messages
 - add close button to menu
 - add loader
+- styling
 
 General:
 
-- difficulty can be implemented in the future
-- markdown rules can be implemented in the future
+- fetching needs optimization in the future (should fetch pages)
