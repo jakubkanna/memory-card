@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import rulesMd from "./assets/rules.md?raw";
+import { getDifficultyData } from "./helpers";
 
 export default function App() {
   const initialWinCount = parseInt(localStorage.getItem("winCount")) || 0;
@@ -14,38 +15,6 @@ export default function App() {
   const [winCount, setWinCount] = useState(initialWinCount);
   const [difficulty, setDifficulty] = useState("easy");
   const [message, setMessage] = useState(rules);
-
-  const getDifficultyData = (difficulty) => {
-    switch (difficulty) {
-      case "easy":
-        return {
-          pokeCount: 50,
-          cardCount: 4,
-          gameDifficulty: difficulty,
-        };
-
-      case "medium":
-        return {
-          pokeCount: 100,
-          cardCount: 8,
-          gameDifficulty: difficulty,
-        };
-
-      case "hard":
-        return {
-          pokeCount: 1000,
-          cardCount: 16,
-          gameDifficulty: difficulty,
-        };
-
-      default:
-        return {
-          pokeCount: 100,
-          cardCount: 4,
-          gameDifficulty: difficulty,
-        };
-    }
-  };
 
   const difficultyData = getDifficultyData(difficulty);
 
@@ -68,6 +37,7 @@ export default function App() {
         winCount={winCount}
         winCountSetter={setWinCount}
         difficultyData={difficultyData}
+        messageSetter={setMessage}
       />
       <Footer />
     </>

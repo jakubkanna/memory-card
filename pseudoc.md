@@ -53,11 +53,10 @@
 
 Base:
 
-- display messages
-- add close button to menu
 - add loader
 - styling
 
 General:
 
 - fetching needs optimization in the future (should fetch pages)
+- passing states from App to Header and Main could be optimized

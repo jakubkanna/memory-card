@@ -9,8 +9,11 @@ export default function Board({
   winCount,
   setWinCount,
   difficultyData,
+  setMessage,
 }) {
   const [cards, setCards] = useState([]);
+  const winnerMessage = "You win.";
+  const loseMessage = "You lose.";
 
   useEffect(() => {
     const { pokeCount, cardCount, gameDifficulty } = difficultyData;
@@ -21,18 +24,25 @@ export default function Board({
       );
 
       setMemoPokeArr((prevMemoPokeArr) => {
-        return isIncluded ? [] : [...prevMemoPokeArr, clickedElData];
+        if (isIncluded) {
+          // Lose condition
+          setMessage(loseMessage);
+          return [];
+        }
+
+        const updatedMemoPokeArr = [...prevMemoPokeArr, clickedElData];
+
+        // Check for win
+        if (updatedMemoPokeArr.length === pokeCount - 1) {
+          let newCount = winCount + 1;
+
+          setWinCount(newCount);
+          setMessage(winnerMessage);
+          return [];
+        }
+
+        return updatedMemoPokeArr;
       });
-
-      //check for win
-      if (memoPokeArr.length === pokeCount - 1) {
-        let newCount = winCount;
-
-        newCount++;
-
-        setWinCount(newCount);
-        setMemoPokeArr([]);
-      }
     }
 
     fetchPokemon(pokeCount).then((data) => {
@@ -54,7 +64,14 @@ export default function Board({
 
       setCards(newCards);
     });
-  }, [difficultyData, memoPokeArr, setMemoPokeArr, setWinCount, winCount]);
+  }, [
+    difficultyData,
+    memoPokeArr,
+    setMemoPokeArr,
+    setMessage,
+    setWinCount,
+    winCount,
+  ]);
 
   return <div className="card-container">{cards}</div>;
 }

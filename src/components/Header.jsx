@@ -2,7 +2,7 @@ import Menu from "./Menu";
 import { ThreeBarsIcon } from "@primer/octicons-react";
 import "../styles/Header.css";
 import CurrentScore from "./CurrentScore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header({
   memoCount,
@@ -17,9 +17,15 @@ export default function Header({
     setMenuVisibility(!menuVisible);
   };
 
+  const openMenu = () => {
+    setMenuVisibility(true);
+  };
+
   const closeMenu = () => {
     setMenuVisibility(false);
   };
+
+  useEffect(() => openMenu(), [message]);
 
   return (
     <header>

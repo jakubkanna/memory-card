@@ -6,6 +6,7 @@ export default function Main({
   winCount,
   winCountSetter,
   difficultyData,
+  messageSetter,
 }) {
   return (
     <main>
@@ -15,6 +16,7 @@ export default function Main({
         winCount={winCount}
         setWinCount={winCountSetter}
         difficultyData={difficultyData}
+        setMessage={messageSetter}
       />
     </main>
   );

@@ -5,14 +5,16 @@ import "../styles/Card.css";
 export default function Card({ url, name, onClick, gameDifficulty }) {
   const [sprites, setSprites] = useState(null);
   const [src, setSrc] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCard = async () => {
+      setLoading(true); // Set loading to true when fetching starts
       const response = await fetch(url);
       const data = await response.json();
       setSprites(data.sprites);
 
-      //if difficulty is other than hard display front
+      // If difficulty is other than hard, display front
       if (gameDifficulty !== "hard") {
         setSrc(data.sprites.front_default);
       } else {
@@ -23,6 +25,8 @@ export default function Card({ url, name, onClick, gameDifficulty }) {
           setSrc(data.sprites.front_default);
         }
       }
+
+      setLoading(false); // Set loading to false when fetching completes
     };
     fetchCard();
   }, [url, gameDifficulty]);
@@ -47,7 +51,7 @@ export default function Card({ url, name, onClick, gameDifficulty }) {
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
-      {src && <img src={src} alt={name} />}
+      {loading ? <p>Loading...</p> : src && <img src={src} alt={name} />}
     </div>
   );
 }
