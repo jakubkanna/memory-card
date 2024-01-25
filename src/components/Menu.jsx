@@ -3,7 +3,7 @@ import "../styles/Menu.css";
 import MessageBox from "./MessageBox";
 import { MarkGithubIcon, XIcon } from "@primer/octicons-react";
 
-export default function Menu({ setDifficulty, closeMenu }) {
+export default function Menu({ setDifficulty, closeMenu, message }) {
   const [displayNewGameButton, setDisplayNewGameButton] = useState(true);
 
   function passValue(difficulty) {
@@ -17,14 +17,10 @@ export default function Menu({ setDifficulty, closeMenu }) {
 
   return (
     <div className="menu">
-      <header>
-        {/* <button type="button">
-          <XIcon size={24} />
-        </button> */}
-      </header>
+      <header>Pokemon Memory Game </header>
 
       <div className="body">
-        <MessageBox />
+        <MessageBox message={message} />
         <div className="buttonBox">
           {displayNewGameButton ? (
             <button type="button" onClick={handleNewGame}>

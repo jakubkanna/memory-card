@@ -9,6 +9,7 @@ export default function Header({
   winCount,
   difficultyData,
   difficultySetter,
+  message,
 }) {
   const [menuVisible, setMenuVisibility] = useState(true);
 
@@ -34,7 +35,11 @@ export default function Header({
       {menuVisible && <div className="backdrop" onClick={closeMenu}></div>}
 
       {menuVisible && (
-        <Menu setDifficulty={difficultySetter} closeMenu={closeMenu} />
+        <Menu
+          setDifficulty={difficultySetter}
+          closeMenu={closeMenu}
+          message={message}
+        />
       )}
     </header>
   );

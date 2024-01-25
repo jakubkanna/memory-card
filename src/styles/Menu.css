@@ -13,6 +13,9 @@
 }
 .menu {
   background-color: var(--lazur-water);
+  overflow: auto;
+  max-height: 100%;
+  margin: 0;
 }
 .backdrop {
   position: fixed;

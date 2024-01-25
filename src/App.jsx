@@ -3,13 +3,17 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import rulesMd from "./assets/rules.md?raw";
 
 export default function App() {
   const initialWinCount = parseInt(localStorage.getItem("winCount")) || 0;
+  const rules = <ReactMarkdown children={rulesMd} />;
 
   const [memoPokeArr, setMemoPokeArr] = useState([]); // memo = memorized
   const [winCount, setWinCount] = useState(initialWinCount);
   const [difficulty, setDifficulty] = useState("easy");
+  const [message, setMessage] = useState(rules);
 
   const getDifficultyData = (difficulty) => {
     switch (difficulty) {
@@ -56,6 +60,7 @@ export default function App() {
         winCount={winCount}
         difficultyData={difficultyData}
         difficultySetter={setDifficulty}
+        message={message}
       />
       <Main
         memoPokeArr={memoPokeArr}
