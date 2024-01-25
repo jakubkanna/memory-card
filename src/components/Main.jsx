@@ -1,11 +1,11 @@
 import Board from "./Board";
-import { useRef } from "react";
 
 export default function Main({
   memoPokeArr,
   memoPokeArrSetter,
   winCount,
   winCountSetter,
+  difficultyData,
 }) {
   return (
     <main>
@@ -14,6 +14,7 @@ export default function Main({
         setMemoPokeArr={memoPokeArrSetter}
         winCount={winCount}
         setWinCount={winCountSetter}
+        difficultyData={difficultyData}
       />
     </main>
   );

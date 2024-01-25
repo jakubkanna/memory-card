@@ -4,16 +4,17 @@ import { getCards, fetchPokemon } from "../helpers";
 import { useEffect, useState } from "react";
 
 export default function Board({
-  cardCount = 4,
-  pokeCount = 10,
   memoPokeArr,
   setMemoPokeArr,
   winCount,
   setWinCount,
+  difficultyData,
 }) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
+    const { pokeCount, cardCount, gameDifficulty } = difficultyData;
+
     function handleClick(clickedElData) {
       const isIncluded = memoPokeArr.some(
         (item) => item.name === clickedElData.name
@@ -46,20 +47,14 @@ export default function Board({
             url={url}
             name={name}
             onClick={() => handleClick(cardData)}
+            gameDifficulty={gameDifficulty}
           />
         );
       });
 
       setCards(newCards);
     });
-  }, [
-    cardCount,
-    memoPokeArr,
-    pokeCount,
-    setMemoPokeArr,
-    setWinCount,
-    winCount,
-  ]);
+  }, [difficultyData, memoPokeArr, setMemoPokeArr, setWinCount, winCount]);
 
   return <div className="card-container">{cards}</div>;
 }

@@ -4,20 +4,34 @@ import "../styles/Header.css";
 import CurrentScore from "./CurrentScore";
 import { useState } from "react";
 
-export default function Header({ memoCount, winCount }) {
-  const [visible, setVisibility] = useState(false); //change to true when app done
+export default function Header({
+  memoCount,
+  winCount,
+  difficultyData,
+  difficultySetter,
+}) {
+  const [visible, setVisibility] = useState(true); //change to true when app done
 
-  const handleClick = () => {
+  const toggleVisibility = () => {
     setVisibility(!visible);
   };
 
   return (
     <header>
-      <button type="button" className="burgerIcon" onClick={handleClick}>
+      <button type="button" className="burgerIcon" onClick={toggleVisibility}>
         <ThreeBarsIcon size={24} />
       </button>
-      <CurrentScore memorized={memoCount} wins={winCount} />
-      {visible && <Menu />}
+      <CurrentScore
+        memorized={memoCount}
+        wins={winCount}
+        difficultyData={difficultyData}
+      />
+      {visible && (
+        <Menu
+          setDifficulty={difficultySetter}
+          setVisibility={toggleVisibility}
+        />
+      )}
     </header>
   );
 }

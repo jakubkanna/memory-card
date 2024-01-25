@@ -9,6 +9,41 @@ export default function App() {
 
   const [memoPokeArr, setMemoPokeArr] = useState([]); // memo = memorized
   const [winCount, setWinCount] = useState(initialWinCount);
+  const [difficulty, setDifficulty] = useState("easy");
+
+  const getDifficultyData = (difficulty) => {
+    switch (difficulty) {
+      case "easy":
+        return {
+          pokeCount: 50,
+          cardCount: 4,
+          gameDifficulty: difficulty,
+        };
+
+      case "medium":
+        return {
+          pokeCount: 100,
+          cardCount: 8,
+          gameDifficulty: difficulty,
+        };
+
+      case "hard":
+        return {
+          pokeCount: 1000,
+          cardCount: 16,
+          gameDifficulty: difficulty,
+        };
+
+      default:
+        return {
+          pokeCount: 100,
+          cardCount: 4,
+          gameDifficulty: difficulty,
+        };
+    }
+  };
+
+  const difficultyData = getDifficultyData(difficulty);
 
   useEffect(() => {
     localStorage.setItem("winCount", winCount.toString());
@@ -16,12 +51,18 @@ export default function App() {
 
   return (
     <>
-      <Header memoCount={memoPokeArr.length} winCount={winCount} />
+      <Header
+        memoCount={memoPokeArr.length}
+        winCount={winCount}
+        difficultyData={difficultyData}
+        difficultySetter={setDifficulty}
+      />
       <Main
         memoPokeArr={memoPokeArr}
         memoPokeArrSetter={setMemoPokeArr}
         winCount={winCount}
         winCountSetter={setWinCount}
+        difficultyData={difficultyData}
       />
       <Footer />
     </>

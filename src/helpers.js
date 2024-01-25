@@ -36,7 +36,7 @@ export async function fetchPokemon(count) {
   try {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${count}`
-    ); //fetch first 100 pokemon
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -47,17 +47,5 @@ export async function fetchPokemon(count) {
     return pokemonData;
   } catch (error) {
     console.error("Error fetching Pokemon data:", error);
-  }
-}
-
-//controls score
-export class GameController {
-  static playRound() {
-    console.log(":)");
-    //if some of memorized items is the same as clicked reset score
-  }
-
-  static isUnique(item, arr) {
-    return arr.some((el) => el === item);
   }
 }
