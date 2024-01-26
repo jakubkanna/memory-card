@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: monospace;
   line-height: 1.5;
   font-weight: 400;
 
@@ -65,4 +65,16 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+html,
+body,
+html *,
+body * {
+  box-sizing: border-box;
+}
+
+body {
+  background: url("../assets/background_prairie_pokemon_screencapture_by_nemotrex_de8nlib.png");
+  background-size: cover;
 }

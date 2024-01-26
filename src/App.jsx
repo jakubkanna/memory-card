@@ -1,21 +1,22 @@
 import "./styles/App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import Footer from "./components/Footer";
-import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import rulesMd from "./assets/rules.md?raw";
 import { getGameConfig, getCards, fetchPokemon } from "./helpers";
-
+import { useState, useEffect } from "react";
 export default function App() {
   const rules = <ReactMarkdown>{rulesMd}</ReactMarkdown>;
-  const [memoPokeArr, setMemoPokeArr] = useState([]); // memo = memorized
+  const [memoPokeArr, setMemoPokeArr] = useState([]);
   const [difficulty, setDifficulty] = useState("easy");
   const [message, setMessage] = useState(rules);
   const [cardsData, setCardsData] = useState([]);
   const [winCount, setWinCount] = useState(
     () => parseInt(localStorage.getItem("winCount")) || 0
-  ); // Initialize winCount from localStorage or default to 0
+  );
+
+  const [isRedBlinking, setIsRedBlinking] = useState(false);
+  const [isGoldBlinking, setIsGoldBlinking] = useState(false);
 
   const gameConfig = getGameConfig(difficulty);
 
@@ -42,18 +43,21 @@ export default function App() {
   }
 
   function win() {
-    // Increment winCount and update localStorage
+    setIsGoldBlinking(true);
+
     const newWinCount = winCount + 1;
     setWinCount(newWinCount);
     localStorage.setItem("winCount", newWinCount.toString());
-    //
-    const winMessage = "Win"; //must be a string otherwise edit Header useEffect
+
+    const winMessage = "Win";
     setMessage(winMessage);
     return [];
   }
 
   const reset = () => {
-    const loseMessage = "Lose"; //must be a string otherwise edit Header useEffect
+    setIsRedBlinking(true);
+
+    const loseMessage = "Lose";
     setMessage(loseMessage);
     return [];
   };
@@ -75,6 +79,16 @@ export default function App() {
     });
   }, [gameConfig.pokeCount, gameConfig.cardCount, memoPokeArr]);
 
+  useEffect(() => {
+    if (isRedBlinking || isGoldBlinking) {
+      const blinkTimer = setTimeout(() => {
+        setIsRedBlinking(false);
+        setIsGoldBlinking(false);
+      }, 500);
+      return () => clearTimeout(blinkTimer);
+    }
+  }, [isRedBlinking, isGoldBlinking]);
+
   return (
     <>
       <Header
@@ -87,7 +101,8 @@ export default function App() {
         gameDifficulty={difficulty}
         onCardClick={onCardClick}
       />
-      <Footer />
+      {isRedBlinking && <div className="blinkRed"></div>}
+      {isGoldBlinking && <div className="blinkGold"></div>}
     </>
   );
 }

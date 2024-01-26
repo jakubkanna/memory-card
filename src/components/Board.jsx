@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import "../styles/Board.css";
 import Card from "./Card";
 import { useEffect, useState } from "react";
 
@@ -24,5 +25,5 @@ export default function Board({ cardsDataArr, gameDifficulty, onCardClick }) {
   }, [cardsDataArr, gameDifficulty, onCardClick]);
 
   //mount
-  return <div className="card-container">{cards}</div>;
+  return <div className="board">{cards}</div>;
 }

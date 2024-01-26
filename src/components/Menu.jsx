@@ -12,7 +12,14 @@ export default function Menu({ setDifficulty, message, closeMenu }) {
 
   return (
     <div className="menu">
-      <header>Pokemon Memory Game </header>
+      <header>
+        <div>
+          <button id="close" type="button" onClick={() => closeMenu()}>
+            <XIcon size={24} />
+          </button>
+        </div>
+        <h2>Pokemon Memory Game </h2>
+      </header>
 
       <div className="body">
         <MessageBox message={message} />
@@ -59,7 +66,8 @@ export default function Menu({ setDifficulty, message, closeMenu }) {
             fontSize: "10px",
           }}>
           <a href="http://jakubkanna.github.io">
-            jakubkanna <MarkGithubIcon size={10} />
+            <span>For educational purposes only</span>{" "}
+            <MarkGithubIcon size={10} /> <span>jakubkanna</span>
           </a>
         </footer>
       </div>

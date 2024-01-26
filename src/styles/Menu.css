@@ -1,4 +1,5 @@
 .menu {
+  box-sizing: border-box;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -9,14 +10,25 @@
 }
 /* color */
 :root {
-  --lazur-water: rgb(0, 155, 157);
+  --lazur-water: rgb(0, 157, 97);
 }
 .menu {
   background-color: var(--lazur-water);
   overflow: auto;
   max-height: 100%;
   margin: 0;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
+.menu > header div {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
 .backdrop {
   position: fixed;
   padding: 0;
@@ -27,4 +39,11 @@
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 998; /* Ensure it's above other elements except menu*/
+}
+
+.buttonBox {
+  margin: 1rem;
+}
+.buttonBox > * > * {
+  margin: 1rem;
 }

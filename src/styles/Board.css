@@ -1,0 +1,10 @@
+.board {
+  display: grid;
+  grid-template-rows: 1fr; /* One row */
+  grid-template-columns: repeat(4, 1fr); /* Four columns by default */
+
+  /* Media query for mobile devices */
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on mobile */
+  }
+}
