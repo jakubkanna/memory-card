@@ -1,10 +1,12 @@
-export default function CurrentScore({ memorized, wins, difficultyData }) {
+import "../styles/CurrentScore.css";
+
+export default function CurrentScore({ gameData }) {
   return (
     <div className="currentScore">
-      <p>Wins: {wins}</p>
-      <p>Level: {`${difficultyData.gameDifficulty}`}</p>
+      <p>Wins: {gameData.winCount}</p>
+      <p>Difficulty: {`${gameData.gameDifficulty}`}</p>
       <p>
-        Memorized: {memorized} / {difficultyData.pokeCount}
+        Memorized: {gameData.memorizedCount} / {gameData.pokeCount}
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-//Create array of 4 items in which at least one is unique
+//Create array of items in which at least one is unique
 export function getCards(data, cardCount, pokeCount, memoPokeArr) {
   const isMemorized = (item) => memoPokeArr.some((el) => el === item);
   const randomIndex = () => Math.floor(Math.random() * pokeCount);
@@ -51,34 +51,30 @@ export async function fetchPokemon(count) {
 }
 
 //
-export const getDifficultyData = (difficulty) => {
+export const getGameConfig = (difficulty) => {
   switch (difficulty) {
     case "easy":
       return {
         pokeCount: 50,
         cardCount: 4,
-        gameDifficulty: difficulty,
       };
 
     case "medium":
       return {
         pokeCount: 100,
         cardCount: 8,
-        gameDifficulty: difficulty,
       };
 
     case "hard":
       return {
         pokeCount: 1000,
         cardCount: 16,
-        gameDifficulty: difficulty,
       };
 
     default:
       return {
         pokeCount: 100,
         cardCount: 4,
-        gameDifficulty: difficulty,
       };
   }
 };

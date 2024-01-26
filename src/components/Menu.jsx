@@ -3,13 +3,8 @@ import "../styles/Menu.css";
 import MessageBox from "./MessageBox";
 import { MarkGithubIcon, XIcon } from "@primer/octicons-react";
 
-export default function Menu({ setDifficulty, closeMenu, message }) {
+export default function Menu({ setDifficulty, message, closeMenu }) {
   const [displayNewGameButton, setDisplayNewGameButton] = useState(true);
-
-  function passValue(difficulty) {
-    setDifficulty(difficulty);
-    closeMenu(); // Hide the Menu component after difficulty is selected
-  }
 
   function handleNewGame() {
     setDisplayNewGameButton(false);
@@ -17,7 +12,14 @@ export default function Menu({ setDifficulty, closeMenu, message }) {
 
   return (
     <div className="menu">
-      <header>Pokemon Memory Game </header>
+      <header>
+        <div>
+          <button id="close" type="button" onClick={() => closeMenu()}>
+            <XIcon size={24} />
+          </button>
+        </div>
+        <h2>Pokemon Memory Game </h2>
+      </header>
 
       <div className="body">
         <MessageBox message={message} />
@@ -28,13 +30,28 @@ export default function Menu({ setDifficulty, closeMenu, message }) {
             </button>
           ) : (
             <div className="difficultyButtons">
-              <button type="button" onClick={() => passValue("easy")}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDifficulty("easy");
+                  closeMenu();
+                }}>
                 Easy
               </button>
-              <button type="button" onClick={() => passValue("medium")}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDifficulty("medium");
+                  closeMenu();
+                }}>
                 Medium
               </button>
-              <button type="button" onClick={() => passValue("hard")}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDifficulty("hard");
+                  closeMenu();
+                }}>
                 Hard
               </button>
             </div>
@@ -49,7 +66,8 @@ export default function Menu({ setDifficulty, closeMenu, message }) {
             fontSize: "10px",
           }}>
           <a href="http://jakubkanna.github.io">
-            jakubkanna <MarkGithubIcon size={10} />
+            <span>For educational purposes only</span>{" "}
+            <MarkGithubIcon size={10} /> <span>jakubkanna</span>
           </a>
         </footer>
       </div>
