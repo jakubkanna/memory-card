@@ -1,16 +1,6 @@
 # Pseudocode:
 
-## Board
+## TODO
 
-- generate cards each round
--
-
-clsoe menu on difficulity chanage
-reset message on menu close
-
-gamedata{} must contain
-
-wins count
-game difficulity
-memorizedCount
-pokeCount
+- displaying / hiding menu on message change update, integrate it with blinking better
+- optimize fetching pokemon
