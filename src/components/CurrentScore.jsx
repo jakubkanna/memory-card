@@ -1,3 +1,5 @@
+import "../styles/CurrentScore.css";
+
 export default function CurrentScore({ gameData }) {
   return (
     <div className="currentScore">
